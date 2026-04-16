@@ -1,0 +1,8 @@
+node_modules/
+dist/
+reports/
+*.log
+.env
+angular-app/node_modules/
+angular-app/dist/
+angular-app/reports/

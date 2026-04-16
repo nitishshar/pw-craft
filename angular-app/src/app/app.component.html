@@ -1,0 +1,15 @@
+<mat-toolbar color="primary" class="app-toolbar">
+  <span class="brand">pw-craft demo</span>
+  <span class="spacer"></span>
+  <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" data-testid="nav-home">Home</a>
+  <a mat-button routerLink="/products" routerLinkActive="active" data-testid="nav-products">Products</a>
+  <a mat-button routerLink="/form-demo" routerLinkActive="active" data-testid="nav-form">Form demo</a>
+  <a mat-button routerLink="/async-demo" routerLinkActive="active" data-testid="nav-async">Async demo</a>
+  <a mat-button routerLink="/counter-demo" routerLinkActive="active" data-testid="nav-counter">Counter</a>
+  <a mat-button routerLink="/animation-demo" routerLinkActive="active" data-testid="nav-animation">Animation</a>
+  <a mat-button routerLink="/about" routerLinkActive="active" data-testid="nav-about">About</a>
+</mat-toolbar>
+
+<main class="app-main">
+  <router-outlet />
+</main>

@@ -1,0 +1,46 @@
+<h1>Products</h1>
+<p class="hint">This page simulates an API call, shows a spinner, and supports query params for <code>category</code> and <code>sort</code>.</p>
+
+@if (loading()) {
+  <div class="loading">
+    <mat-spinner data-testid="loading-spinner" diameter="40"></mat-spinner>
+  </div>
+} @else {
+  <div class="controls">
+    <mat-form-field appearance="outline">
+      <mat-label>Category</mat-label>
+      <mat-select [value]="category()" (valueChange)="onCategoryChange($event)">
+        <mat-option value="all">All</mat-option>
+        <mat-option value="electronics">Electronics</mat-option>
+        <mat-option value="accessories">Accessories</mat-option>
+        <mat-option value="books">Books</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Sort</mat-label>
+      <mat-select [value]="sort()" (valueChange)="onSortChange($event)">
+        <mat-option value="name">Name</mat-option>
+        <mat-option value="price">Price</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="grid">
+    @for (p of filteredProducts(); track p.id) {
+      <mat-card class="product" data-testid="product-card">
+        <img mat-card-image [src]="p.image" [alt]="p.name" />
+        <mat-card-title>{{ p.name }}</mat-card-title>
+        <mat-card-content>
+          <div class="meta">
+            <span class="chip">{{ p.category }}</span>
+            <span class="price">\${{ p.price }}</span>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <a mat-button routerLink="/form-demo">Details</a>
+        </mat-card-actions>
+      </mat-card>
+    }
+  </div>
+}

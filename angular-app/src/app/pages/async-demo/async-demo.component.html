@@ -1,0 +1,36 @@
+<h1>Async demo</h1>
+<p class="hint">Delayed rendering, simulated network latency, and a tiny background job state machine.</p>
+
+<div class="stack">
+  <button mat-raised-button color="primary" type="button" data-testid="load-table" (click)="loadTable()">Load table (2s)</button>
+
+  @if (showTable()) {
+    <table mat-table [dataSource]="rows" class="mat-elevation-z1" data-testid="data-table">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+      </ng-container>
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef>Role</th>
+        <td mat-cell *matCellDef="let row">{{ row.role }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+      <tr mat-row *matRowDef="let row; columns: columns"></tr>
+    </table>
+  }
+
+  <button mat-stroked-button type="button" data-testid="slow-api" (click)="slowApi()">Slow API (3.5s)</button>
+
+  @if (showAsync()) {
+    <div class="panel" data-testid="async-content">Slow API completed</div>
+  }
+
+  <div class="job">
+    <button mat-button type="button" data-testid="start-background-job" (click)="startJob()">Start background job</button>
+    <div class="status" data-testid="job-status">{{ jobStatus() }}</div>
+    @if (jobStatus() !== 'Idle' && jobStatus() !== 'Completed') {
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    }
+  </div>
+</div>

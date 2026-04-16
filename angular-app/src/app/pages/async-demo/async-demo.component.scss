@@ -1,0 +1,33 @@
+.hint {
+  color: rgba(226, 232, 240, 0.78);
+  max-width: 90ch;
+}
+
+.stack {
+  display: grid;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+table {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.panel {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  background: rgba(99, 102, 241, 0.12);
+}
+
+.job {
+  display: grid;
+  gap: 10px;
+  max-width: 520px;
+}
+
+.status {
+  font-weight: 700;
+}

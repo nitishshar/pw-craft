@@ -1,0 +1,30 @@
+<section class="hero">
+  <h1 data-testid="home-hero-title">pw-craft</h1>
+  <p class="subtitle">A Playwright-first testing toolkit with BDD, rich helpers, and polished reporting.</p>
+  <div class="cta">
+    <a mat-raised-button color="primary" routerLink="/products" data-testid="hero-products">Explore products</a>
+    <a mat-stroked-button routerLink="/form-demo" data-testid="hero-forms">Try forms</a>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="stat"><span class="num">10+</span><span class="label">helpers</span></div>
+  <div class="stat"><span class="num">35+</span><span class="label">locators</span></div>
+  <div class="stat"><span class="num">50+</span><span class="label">actions</span></div>
+  <div class="stat"><span class="num">40+</span><span class="label">assertions</span></div>
+</section>
+
+<section class="features">
+  <h2>Demo routes</h2>
+  <div class="grid">
+    @for (f of features; track f.route) {
+      <mat-card class="feature" [attr.data-testid]="f.testid">
+        <mat-card-title>{{ f.title }}</mat-card-title>
+        <mat-card-content>{{ f.description }}</mat-card-content>
+        <mat-card-actions>
+          <a mat-button [routerLink]="f.route">Open</a>
+        </mat-card-actions>
+      </mat-card>
+    }
+  </div>
+</section>

@@ -1,0 +1,22 @@
+<h1>Counter demo</h1>
+<p class="hint">Live region updates, step sizing, and keyboard-friendly controls.</p>
+
+<div class="row">
+  <button mat-stroked-button type="button" data-testid="decrement" (click)="decrement()">Decrement</button>
+  <button mat-raised-button color="primary" type="button" data-testid="increment" (click)="increment()">Increment</button>
+  <button mat-button type="button" data-testid="reset" (click)="reset()">Reset</button>
+</div>
+
+<div
+  class="display"
+  data-testid="counter-display"
+  role="status"
+  aria-live="polite"
+>
+  {{ count() }}
+</div>
+
+<mat-form-field appearance="outline" class="step">
+  <mat-label>Step</mat-label>
+  <input matInput type="number" name="step" [(ngModel)]="step" data-testid="counter-step-input" />
+</mat-form-field>

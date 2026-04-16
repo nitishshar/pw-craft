@@ -1,0 +1,103 @@
+.hint {
+  color: rgba(226, 232, 240, 0.78);
+  max-width: 90ch;
+}
+
+.toast {
+  margin: 12px 0 16px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  background: rgba(34, 197, 94, 0.12);
+}
+
+.form {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.block-label {
+  display: block;
+  margin: 6px 0 6px;
+  color: rgba(226, 232, 240, 0.85);
+  font-weight: 600;
+}
+
+.radio-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.file {
+  display: grid;
+  gap: 8px;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.muted {
+  color: rgba(148, 163, 184, 0.95);
+}
+
+.dnd {
+  margin-top: 26px;
+}
+
+.dnd-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 900px) {
+  .dnd-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dnd-column {
+  border: 1px dashed rgba(148, 163, 184, 0.35);
+  border-radius: 14px;
+  padding: 10px;
+  min-height: 140px;
+  background: rgba(15, 23, 42, 0.35);
+}
+
+.drop {
+  border-style: solid;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.dnd-item {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  margin: 8px;
+  background: rgba(30, 41, 59, 0.75);
+  cursor: grab;
+}

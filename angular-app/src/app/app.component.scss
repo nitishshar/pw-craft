@@ -1,0 +1,26 @@
+.app-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.app-main {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+a.active {
+  outline: 2px solid rgba(255, 255, 255, 0.35);
+  outline-offset: 2px;
+  border-radius: 10px;
+}
