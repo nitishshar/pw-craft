@@ -1,36 +1,69 @@
-<h1>Async demo</h1>
-<p class="hint">Delayed rendering, simulated network latency, and a tiny background job state machine.</p>
+<article class="app-page">
+  <header class="page-intro">
+    <p class="page-kicker">Latency and state</p>
+    <h1>Async demo</h1>
+    <p class="hint">Delayed rendering, simulated network latency, and a tiny background job state machine.</p>
+  </header>
 
-<div class="stack">
-  <button mat-raised-button color="primary" type="button" data-testid="load-table" (click)="loadTable()">Load table (2s)</button>
+  <div class="async-grid">
+    <mat-card class="surface-card async-block">
+      <mat-card-header>
+        <mat-card-title>Data table</mat-card-title>
+        <mat-card-subtitle>Two second delay before rows appear</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="async-block-body">
+        <button mat-flat-button color="primary" type="button" data-testid="load-table" (click)="loadTable()">Load table (2s)</button>
 
-  @if (showTable()) {
-    <table mat-table [dataSource]="rows" class="mat-elevation-z1" data-testid="data-table">
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Name</th>
-        <td mat-cell *matCellDef="let row">{{ row.name }}</td>
-      </ng-container>
-      <ng-container matColumnDef="role">
-        <th mat-header-cell *matHeaderCellDef>Role</th>
-        <td mat-cell *matCellDef="let row">{{ row.role }}</td>
-      </ng-container>
+        @if (showTable()) {
+          <div class="table-wrap">
+            <table mat-table [dataSource]="rows" data-testid="data-table">
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Name</th>
+                <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+              </ng-container>
+              <ng-container matColumnDef="role">
+                <th mat-header-cell *matHeaderCellDef>Role</th>
+                <td mat-cell *matCellDef="let row">{{ row.role }}</td>
+              </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="columns"></tr>
-      <tr mat-row *matRowDef="let row; columns: columns"></tr>
-    </table>
-  }
+              <tr mat-header-row *matHeaderRowDef="columns"></tr>
+              <tr mat-row *matRowDef="let row; columns: columns"></tr>
+            </table>
+          </div>
+        }
+      </mat-card-content>
+    </mat-card>
 
-  <button mat-stroked-button type="button" data-testid="slow-api" (click)="slowApi()">Slow API (3.5s)</button>
+    <mat-card class="surface-card async-block">
+      <mat-card-header>
+        <mat-card-title>Slow API</mat-card-title>
+        <mat-card-subtitle>Simulated 3.5s network response</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="async-block-body">
+        <button mat-stroked-button type="button" data-testid="slow-api" (click)="slowApi()">Slow API (3.5s)</button>
 
-  @if (showAsync()) {
-    <div class="panel" data-testid="async-content">Slow API completed</div>
-  }
+        @if (showAsync()) {
+          <div class="async-panel" data-testid="async-content">Slow API completed</div>
+        }
+      </mat-card-content>
+    </mat-card>
 
-  <div class="job">
-    <button mat-button type="button" data-testid="start-background-job" (click)="startJob()">Start background job</button>
-    <div class="status" data-testid="job-status">{{ jobStatus() }}</div>
-    @if (jobStatus() !== 'Idle' && jobStatus() !== 'Completed') {
-      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-    }
+    <mat-card class="surface-card async-block async-block--wide">
+      <mat-card-header>
+        <mat-card-title>Background job</mat-card-title>
+        <mat-card-subtitle>Indeterminate progress while work is in flight</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="async-block-body">
+        <div class="job-row">
+          <button mat-flat-button color="primary" type="button" data-testid="start-background-job" (click)="startJob()">
+            Start background job
+          </button>
+          <span class="job-status" data-testid="job-status" [class.job-status--done]="jobStatus() === 'Completed'">{{ jobStatus() }}</span>
+        </div>
+        @if (jobStatus() !== 'Idle' && jobStatus() !== 'Completed') {
+          <mat-progress-bar mode="indeterminate" class="job-bar"></mat-progress-bar>
+        }
+      </mat-card-content>
+    </mat-card>
   </div>
-</div>
+</article>

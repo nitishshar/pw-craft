@@ -1,111 +1,141 @@
-<h1>Form demo</h1>
-<p class="hint">Reactive forms, Material fields, drag-and-drop, uploads, and validation.</p>
+<article class="app-page">
+  <header class="page-intro">
+    <p class="page-kicker">Interaction patterns</p>
+    <h1>Form demo</h1>
+    <p class="hint">Reactive forms, Material fields, drag-and-drop, uploads, and validation.</p>
+  </header>
 
-@if (showSuccess()) {
-  <div class="toast" role="status" data-testid="success-toast">Submitted successfully</div>
-}
+  @if (showSuccess()) {
+    <div class="toast" role="status" data-testid="success-toast">
+      <span class="toast-icon" aria-hidden="true"></span>
+      <span>Submitted successfully</span>
+    </div>
+  }
 
-<form class="form" (ngSubmit)="submit()" [formGroup]="form">
-  <mat-form-field appearance="outline">
-    <mat-label>Full name</mat-label>
-    <input matInput formControlName="fullName" data-testid="full-name-input" />
-    @if (form.controls.fullName.touched && form.controls.fullName.hasError('required')) {
-      <mat-error data-testid="full-name-error">Full name is required</mat-error>
-    }
-  </mat-form-field>
+  <mat-card class="surface-card form-card">
+    <mat-card-header>
+      <mat-card-title>Contact</mat-card-title>
+      <mat-card-subtitle>Fields map cleanly to stable selectors in tests</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form class="form" (ngSubmit)="submit()" [formGroup]="form">
+        <mat-form-field appearance="outline">
+          <mat-label>Full name</mat-label>
+          <input matInput formControlName="fullName" data-testid="full-name-input" />
+          @if (form.controls.fullName.touched && form.controls.fullName.hasError('required')) {
+            <mat-error data-testid="full-name-error">Full name is required</mat-error>
+          }
+        </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Email</mat-label>
-    <input matInput type="email" formControlName="email" data-testid="email-input" />
-    @if (form.controls.email.touched && form.controls.email.hasError('required')) {
-      <mat-error data-testid="email-error">Email is required</mat-error>
-    } @else if (form.controls.email.touched && form.controls.email.hasError('email')) {
-      <mat-error data-testid="email-error">Enter a valid email</mat-error>
-    }
-  </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" data-testid="email-input" />
+          @if (form.controls.email.touched && form.controls.email.hasError('required')) {
+            <mat-error data-testid="email-error">Email is required</mat-error>
+          } @else if (form.controls.email.touched && form.controls.email.hasError('email')) {
+            <mat-error data-testid="email-error">Enter a valid email</mat-error>
+          }
+        </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Message</mat-label>
-    <textarea matInput rows="4" formControlName="message"></textarea>
-  </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Message</mat-label>
+          <textarea matInput rows="4" formControlName="message"></textarea>
+        </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Category</mat-label>
-    <mat-select formControlName="category" data-testid="category-select">
-      <mat-option value="General">General</mat-option>
-      <mat-option value="Support">Support</mat-option>
-      <mat-option value="Billing">Billing</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <div class="muted" data-testid="category-value">{{ form.controls.category.value }}</div>
+        <mat-form-field appearance="outline">
+          <mat-label>Category</mat-label>
+          <mat-select formControlName="category" data-testid="category-select">
+            <mat-option value="General">General</mat-option>
+            <mat-option value="Support">Support</mat-option>
+            <mat-option value="Billing">Billing</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="muted category-readout" data-testid="category-value">{{ form.controls.category.value }}</div>
 
-  <div class="row">
-    <mat-checkbox formControlName="newsletter" data-testid="newsletter-checkbox">Newsletter</mat-checkbox>
-    <mat-checkbox formControlName="terms" data-testid="terms-checkbox">I accept the terms</mat-checkbox>
-  </div>
-
-  <label class="block-label">Shipping</label>
-  <mat-radio-group formControlName="shipping" class="radio-group">
-    <mat-radio-button value="standard" data-testid="shipping-standard">Standard</mat-radio-button>
-    <mat-radio-button value="express" data-testid="shipping-express">Express</mat-radio-button>
-    <mat-radio-button value="overnight" data-testid="shipping-overnight">Overnight</mat-radio-button>
-  </mat-radio-group>
-
-  <div class="file">
-    <label class="block-label">Attachment</label>
-    <input type="file" data-testid="file-input" (change)="onFileSelected($event)" />
-    <div class="muted">Selected: <span data-testid="file-name-display">{{ fileName() }}</span></div>
-  </div>
-
-  <div class="actions">
-    <button mat-raised-button color="primary" type="submit" data-testid="submit-form">Submit</button>
-    <button
-      mat-stroked-button
-      type="button"
-      data-testid="tooltip-trigger"
-      matTooltip="pw-craft helps you write resilient UI tests"
-    >
-      Hover for tooltip
-    </button>
-  </div>
-</form>
-
-<section class="dnd">
-  <h2>Drag and drop</h2>
-  <button type="button" class="sr-only" data-testid="simulate-drop" (click)="simulateDropFirstItem()">
-    Simulate first drop
-  </button>
-  <div class="dnd-grid">
-    <div
-      class="dnd-column"
-      cdkDropList
-      #pendingList="cdkDropList"
-      id="pending-list"
-      [cdkDropListData]="pendingDragItems"
-      [cdkDropListConnectedTo]="['done-list']"
-      (cdkDropListDropped)="drop($event)"
-    >
-      @for (item of pendingDragItems; track item; let idx = $index) {
-        <div class="dnd-item" cdkDrag [attr.data-testid]="idx === 0 ? 'drag-item-1' : idx === 1 ? 'drag-item-2' : 'drag-item-3'">
-          {{ item }}
+        <div class="row">
+          <mat-checkbox formControlName="newsletter" data-testid="newsletter-checkbox">Newsletter</mat-checkbox>
+          <mat-checkbox formControlName="terms" data-testid="terms-checkbox">I accept the terms</mat-checkbox>
         </div>
-      }
-    </div>
 
-    <div
-      class="dnd-column drop"
-      cdkDropList
-      #doneList="cdkDropList"
-      id="done-list"
-      [cdkDropListData]="droppedDragItems"
-      [cdkDropListConnectedTo]="['pending-list']"
-      data-testid="drop-zone"
-      (cdkDropListDropped)="drop($event)"
-    >
-      <div class="muted" data-testid="dropped-count">{{ droppedDragItems.length }}</div>
-      @for (item of droppedDragItems; track item) {
-        <div class="dnd-item" cdkDrag>{{ item }}</div>
-      }
-    </div>
-  </div>
-</section>
+        <label class="block-label">Shipping</label>
+        <mat-radio-group formControlName="shipping" class="radio-group">
+          <mat-radio-button value="standard" data-testid="shipping-standard">Standard</mat-radio-button>
+          <mat-radio-button value="express" data-testid="shipping-express">Express</mat-radio-button>
+          <mat-radio-button value="overnight" data-testid="shipping-overnight">Overnight</mat-radio-button>
+        </mat-radio-group>
+
+        <div class="file-zone">
+          <label class="block-label" for="file-input">Attachment</label>
+          <label class="file-drop" for="file-input">
+            <span class="file-drop-text">Choose a file or drop it here</span>
+            <input id="file-input" class="file-input-native" type="file" data-testid="file-input" (change)="onFileSelected($event)" />
+          </label>
+          <div class="muted file-meta">Selected: <span data-testid="file-name-display">{{ fileName() }}</span></div>
+        </div>
+
+        <div class="actions">
+          <button mat-flat-button color="primary" type="submit" data-testid="submit-form">Submit</button>
+          <button
+            mat-stroked-button
+            type="button"
+            data-testid="tooltip-trigger"
+            matTooltip="pw-craft helps you write resilient UI tests"
+          >
+            Hover for tooltip
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="surface-card dnd-card">
+    <mat-card-header>
+      <mat-card-title>Drag and drop</mat-card-title>
+      <mat-card-subtitle>CDK lists — assert counts and items in end-to-end tests</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <button type="button" class="sr-only" data-testid="simulate-drop" (click)="simulateDropFirstItem()">
+        Simulate first drop
+      </button>
+      <div class="dnd-grid">
+        <div class="dnd-column dnd-column--source" data-label="Source">
+          <span class="dnd-label">Source</span>
+          <div
+            class="dnd-list"
+            cdkDropList
+            #pendingList="cdkDropList"
+            id="pending-list"
+            [cdkDropListData]="pendingDragItems"
+            [cdkDropListConnectedTo]="['done-list']"
+            (cdkDropListDropped)="drop($event)"
+          >
+            @for (item of pendingDragItems; track item; let idx = $index) {
+              <div class="dnd-item" cdkDrag [attr.data-testid]="idx === 0 ? 'drag-item-1' : idx === 1 ? 'drag-item-2' : 'drag-item-3'">
+                {{ item }}
+              </div>
+            }
+          </div>
+        </div>
+
+        <div class="dnd-column dnd-column--target" data-label="Drop zone">
+          <span class="dnd-label">Drop zone</span>
+          <div
+            class="dnd-list dnd-list--drop"
+            cdkDropList
+            #doneList="cdkDropList"
+            id="done-list"
+            [cdkDropListData]="droppedDragItems"
+            [cdkDropListConnectedTo]="['pending-list']"
+            data-testid="drop-zone"
+            (cdkDropListDropped)="drop($event)"
+          >
+            <div class="drop-count" data-testid="dropped-count">{{ droppedDragItems.length }}</div>
+            @for (item of droppedDragItems; track item) {
+              <div class="dnd-item" cdkDrag>{{ item }}</div>
+            }
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</article>

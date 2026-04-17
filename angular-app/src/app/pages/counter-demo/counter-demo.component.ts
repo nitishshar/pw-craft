@@ -3,11 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-counter-demo',
   standalone: true,
-  imports: [FormsModule, MatButtonModule, MatFormFieldModule, MatInputModule],
+  imports: [FormsModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule],
   templateUrl: './counter-demo.component.html',
   styleUrl: './counter-demo.component.scss',
 })

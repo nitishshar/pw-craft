@@ -1,45 +1,55 @@
-.hint {
-  color: rgba(226, 232, 240, 0.78);
-  max-width: 90ch;
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 1.25rem;
+  padding: 14px 18px;
+  border-radius: var(--pw-radius-md, 16px);
+  border: 1px solid rgba(74, 222, 128, 0.35);
+  background: linear-gradient(135deg, rgba(74, 222, 128, 0.14), rgba(34, 197, 94, 0.08));
+  box-shadow: 0 12px 32px rgba(34, 197, 94, 0.12);
+  font-weight: 500;
 }
 
-.toast {
-  margin: 12px 0 16px;
-  padding: 12px 14px;
-  border-radius: 12px;
-  border: 1px solid rgba(34, 197, 94, 0.35);
-  background: rgba(34, 197, 94, 0.12);
+.toast-icon {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--pw-success, #4ade80);
+  box-shadow: 0 0 12px rgba(74, 222, 128, 0.7);
+}
+
+.form-card mat-card-content {
+  padding-top: 8px !important;
 }
 
 .form {
   display: grid;
-  gap: 12px;
-  margin-top: 12px;
+  gap: 14px;
+  margin-top: 4px;
 }
 
 .row {
   display: flex;
-  gap: 16px;
+  gap: 20px;
   flex-wrap: wrap;
   align-items: center;
 }
 
 .block-label {
   display: block;
-  margin: 6px 0 6px;
-  color: rgba(226, 232, 240, 0.85);
+  margin: 4px 0 8px;
+  color: rgba(226, 232, 240, 0.88);
   font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .radio-group {
   display: flex;
-  gap: 12px;
+  gap: 16px;
   flex-wrap: wrap;
-}
-
-.file {
-  display: grid;
-  gap: 8px;
 }
 
 .actions {
@@ -47,20 +57,67 @@
   gap: 12px;
   flex-wrap: wrap;
   align-items: center;
+  margin-top: 8px;
 }
 
 .muted {
-  color: rgba(148, 163, 184, 0.95);
+  color: var(--pw-text-subtle, rgba(148, 163, 184, 0.88));
 }
 
-.dnd {
-  margin-top: 26px;
+.category-readout {
+  margin-top: -6px;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+}
+
+.file-zone {
+  display: grid;
+  gap: 10px;
+}
+
+.file-drop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+  padding: 16px;
+  border-radius: var(--pw-radius-md, 16px);
+  border: 1px dashed rgba(148, 163, 184, 0.35);
+  background: rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  position: relative;
+}
+
+.file-drop:hover {
+  border-color: rgba(125, 211, 252, 0.45);
+  background: rgba(56, 189, 248, 0.06);
+}
+
+.file-drop-text {
+  font-size: 0.9rem;
+  color: rgba(226, 232, 240, 0.75);
+}
+
+.file-input-native {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.file-meta {
+  font-size: 0.88rem;
+}
+
+.dnd-card mat-card-content {
+  padding-top: 4px !important;
 }
 
 .dnd-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 16px;
 }
 
 @media (max-width: 900px) {
@@ -70,15 +127,41 @@
 }
 
 .dnd-column {
-  border: 1px dashed rgba(148, 163, 184, 0.35);
-  border-radius: 14px;
-  padding: 10px;
-  min-height: 140px;
-  background: rgba(15, 23, 42, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.drop {
+.dnd-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(148, 163, 184, 0.85);
+}
+
+.dnd-list {
+  flex: 1;
+  min-height: 160px;
+  border-radius: var(--pw-radius-md, 16px);
+  padding: 12px;
+  border: 1px dashed rgba(148, 163, 184, 0.28);
+  background: rgba(8, 12, 22, 0.35);
+}
+
+.dnd-list--drop {
   border-style: solid;
+  border-color: rgba(125, 211, 252, 0.22);
+  background: rgba(56, 189, 248, 0.05);
+}
+
+.drop-count {
+  font-size: 1.75rem;
+  font-weight: 700;
+  font-family: var(--pw-font-display, 'IBM Plex Sans', sans-serif);
+  letter-spacing: -0.03em;
+  color: rgba(226, 232, 240, 0.92);
+  margin-bottom: 8px;
 }
 
 .sr-only {
@@ -94,10 +177,22 @@
 }
 
 .dnd-item {
-  padding: 10px 12px;
-  border-radius: 12px;
-  border: 1px solid rgba(148, 163, 184, 0.22);
-  margin: 8px;
-  background: rgba(30, 41, 59, 0.75);
+  padding: 12px 14px;
+  border-radius: var(--pw-radius-sm, 12px);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  margin: 8px 4px;
+  background: var(--pw-surface-raised, rgba(32, 44, 68, 0.88));
   cursor: grab;
+  font-size: 0.92rem;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.dnd-item:hover {
+  border-color: rgba(125, 211, 252, 0.35);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.cdk-drag-preview {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  border-radius: var(--pw-radius-sm, 12px);
 }

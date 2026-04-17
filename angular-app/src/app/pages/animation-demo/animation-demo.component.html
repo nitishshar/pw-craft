@@ -1,25 +1,44 @@
-<h1>Animation demo</h1>
-<p class="hint">CSS transitions and simple class toggles that are easy to assert in end-to-end tests.</p>
+<article class="app-page">
+  <header class="page-intro">
+    <p class="page-kicker">Motion</p>
+    <h1>Animation demo</h1>
+    <p class="hint">CSS transitions and simple class toggles that are easy to assert in end-to-end tests.</p>
+  </header>
 
-<div class="panel">
-  <button mat-stroked-button type="button" data-testid="trigger-move" (click)="triggerMove()">Move box</button>
+  <div class="anim-grid">
+    <mat-card class="surface-card anim-card">
+      <mat-card-header>
+        <mat-card-title>Translate</mat-card-title>
+        <mat-card-subtitle>Transform with completion class</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <button mat-stroked-button type="button" data-testid="trigger-move" (click)="triggerMove()">Move box</button>
 
-  <div
-    class="box"
-    data-testid="animated-element"
-    [class.moved]="moved()"
-    [class.animation-complete]="animationComplete()"
-  ></div>
-</div>
+        <div
+          class="box"
+          data-testid="animated-element"
+          [class.moved]="moved()"
+          [class.animation-complete]="animationComplete()"
+        ></div>
+      </mat-card-content>
+    </mat-card>
 
-<div class="panel">
-  <button mat-button type="button" (click)="toggleFade()">Toggle fade</button>
-  <div
-    class="fade"
-    data-testid="fade-element"
-    [class.fade-in]="fadedIn()"
-    [class.fade-out]="!fadedIn()"
-  >
-    Fade content
+    <mat-card class="surface-card anim-card">
+      <mat-card-header>
+        <mat-card-title>Opacity</mat-card-title>
+        <mat-card-subtitle>Fade in and out</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <button mat-flat-button color="primary" type="button" data-testid="toggle-fade" (click)="toggleFade()">Toggle fade</button>
+        <div
+          class="fade"
+          data-testid="fade-element"
+          [class.fade-in]="fadedIn()"
+          [class.fade-out]="!fadedIn()"
+        >
+          Fade content
+        </div>
+      </mat-card-content>
+    </mat-card>
   </div>
-</div>
+</article>

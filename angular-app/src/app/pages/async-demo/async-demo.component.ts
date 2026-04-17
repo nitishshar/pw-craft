@@ -2,11 +2,12 @@ import { Component, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-async-demo',
   standalone: true,
-  imports: [MatButtonModule, MatTableModule, MatProgressBarModule],
+  imports: [MatButtonModule, MatTableModule, MatProgressBarModule, MatCardModule],
   templateUrl: './async-demo.component.html',
   styleUrl: './async-demo.component.scss',
 })

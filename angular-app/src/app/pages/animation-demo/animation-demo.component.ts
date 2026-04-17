@@ -1,10 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-animation-demo',
   standalone: true,
-  imports: [MatButtonModule],
+  imports: [MatButtonModule, MatCardModule],
   templateUrl: './animation-demo.component.html',
   styleUrl: './animation-demo.component.scss',
 })

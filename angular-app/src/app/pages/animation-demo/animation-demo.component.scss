@@ -1,37 +1,47 @@
-.hint {
-  color: rgba(226, 232, 240, 0.78);
-  max-width: 90ch;
+.anim-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
 }
 
-.panel {
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  border-radius: 14px;
-  padding: 14px;
-  margin: 14px 0;
-  background: rgba(15, 23, 42, 0.35);
+@media (max-width: 720px) {
+  .anim-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.anim-card mat-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-top: 8px !important;
 }
 
 .box {
-  width: 96px;
-  height: 56px;
-  margin-top: 14px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.95), rgba(14, 165, 233, 0.85));
+  width: 100px;
+  height: 60px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.95), rgba(129, 140, 248, 0.9));
   transform: translateX(0);
   transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-  outline: 2px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 12px 28px rgba(56, 189, 248, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.12) inset;
 }
 
 .box.moved {
-  transform: translateX(220px);
+  transform: translateX(min(220px, 38vw));
 }
 
 .fade {
-  margin-top: 12px;
-  padding: 12px;
-  border-radius: 12px;
+  margin-top: 4px;
+  padding: 16px 18px;
+  border-radius: var(--pw-radius-md, 16px);
   border: 1px solid rgba(148, 163, 184, 0.18);
-  transition: opacity 600ms ease, transform 600ms ease;
+  transition:
+    opacity 600ms ease,
+    transform 600ms ease;
+  font-weight: 500;
 }
 
 .fade-in {
@@ -40,6 +50,6 @@
 }
 
 .fade-out {
-  opacity: 0.15;
-  transform: translateY(6px);
+  opacity: 0.18;
+  transform: translateY(8px);
 }

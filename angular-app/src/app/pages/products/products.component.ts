@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
 
 type Category = 'all' | 'electronics' | 'accessories' | 'books';
 
@@ -20,7 +21,15 @@ interface Product {
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [RouterLink, MatProgressSpinnerModule, MatCardModule, MatFormFieldModule, MatSelectModule, MatOptionModule],
+  imports: [
+    RouterLink,
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatButtonModule,
+  ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })

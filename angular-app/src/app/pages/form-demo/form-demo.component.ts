@@ -8,6 +8,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatCardModule } from '@angular/material/card';
 import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -23,6 +24,7 @@ import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem }
     MatRadioModule,
     MatButtonModule,
     MatTooltipModule,
+    MatCardModule,
     CdkDropList,
     CdkDrag,
   ],

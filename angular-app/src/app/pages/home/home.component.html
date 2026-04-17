@@ -1,49 +1,62 @@
-<section class="hero">
-  <div class="hero-copy">
-    <p class="eyebrow">End-to-end reference application</p>
-    <h1 data-testid="home-hero-title">pw-craft</h1>
-    <p class="subtitle">
-      A Playwright-first toolkit with Gherkin-friendly fixtures, expressive helpers, and reporting you can share with the
-      wider team.
-    </p>
-    <div class="cta">
-      <a mat-raised-button color="primary" routerLink="/products" data-testid="hero-products">Browse products</a>
-      <a mat-stroked-button routerLink="/form-demo" data-testid="hero-forms">Open form demo</a>
+<div class="home">
+  <section class="hero" aria-labelledby="home-hero-title">
+    <div class="hero-copy">
+      <p class="eyebrow">End-to-end reference application</p>
+      <h1 id="home-hero-title" data-testid="home-hero-title">pw-craft</h1>
+      <p class="subtitle">
+        A Playwright-first toolkit with Gherkin-friendly fixtures, expressive helpers, and reporting you can share with the
+        wider team.
+      </p>
+      <div class="cta">
+        <a mat-raised-button color="primary" routerLink="/products" data-testid="hero-products">Browse products</a>
+        <a mat-stroked-button routerLink="/form-demo" data-testid="hero-forms">Open form demo</a>
+      </div>
     </div>
-  </div>
-  <aside class="hero-panel" aria-label="Highlights">
-    <div class="panel-inner">
-      <h2 class="panel-title">Built for reliability</h2>
-      <ul class="panel-list">
-        <li>Stable selectors and realistic user flows</li>
-        <li>Async, animation, and accessibility scenarios</li>
-        <li>HTML + Monocart reports from the same run</li>
-      </ul>
-    </div>
-  </aside>
-</section>
+    <aside class="hero-panel" aria-label="Highlights">
+      <div class="panel-inner">
+        <h2 class="panel-title">Built for reliability</h2>
+        <ul class="panel-list">
+          <li><span class="panel-bullet" aria-hidden="true"></span>Stable selectors and realistic user flows</li>
+          <li><span class="panel-bullet" aria-hidden="true"></span>Async, animation, and accessibility scenarios</li>
+          <li><span class="panel-bullet" aria-hidden="true"></span>HTML and Monocart reports from the same run</li>
+        </ul>
+      </div>
+    </aside>
+  </section>
 
-<section class="stats" aria-label="Toolkit highlights">
-  <div class="stat"><span class="num">10+</span><span class="label">helpers</span></div>
-  <div class="stat"><span class="num">35+</span><span class="label">locators</span></div>
-  <div class="stat"><span class="num">50+</span><span class="label">actions</span></div>
-  <div class="stat"><span class="num">40+</span><span class="label">assertions</span></div>
-</section>
-
-<section class="features">
-  <div class="section-head">
-    <h2>Demo routes</h2>
-    <p class="section-lead">Each area is designed to exercise a different slice of browser automation.</p>
-  </div>
-  <div class="grid">
-    @for (f of features; track f.route) {
-      <mat-card class="feature" [attr.data-testid]="f.testid">
-        <mat-card-title>{{ f.title }}</mat-card-title>
-        <mat-card-content>{{ f.description }}</mat-card-content>
-        <mat-card-actions align="end">
-          <a mat-button color="primary" [routerLink]="f.route">Open</a>
-        </mat-card-actions>
-      </mat-card>
+  <section class="stats" aria-label="Toolkit highlights">
+    @for (s of stats; track s.label) {
+      <div class="stat">
+        <span class="num">{{ s.num }}</span>
+        <span class="label">{{ s.label }}</span>
+      </div>
     }
-  </div>
-</section>
+  </section>
+
+  <section class="features" aria-labelledby="features-heading">
+    <div class="section-head">
+      <h2 id="features-heading">Demo routes</h2>
+      <p class="section-lead">Each area is designed to exercise a different slice of browser automation.</p>
+    </div>
+    <div class="feature-grid">
+      @for (f of features; track f.route; let idx = $index) {
+        <mat-card [class]="'feature feature--' + featureAccents[idx]" [attr.data-testid]="f.testid">
+          <div class="feature-glow" aria-hidden="true"></div>
+          <mat-card-header class="feature-header">
+            <div mat-card-avatar class="feature-avatar" aria-hidden="true"></div>
+            <div class="feature-titles">
+              <mat-card-title class="feature-title">{{ f.title }}</mat-card-title>
+              <mat-card-subtitle class="feature-tag">{{ f.tag }}</mat-card-subtitle>
+            </div>
+          </mat-card-header>
+          <mat-card-content class="feature-body">
+            <p class="feature-desc">{{ f.description }}</p>
+          </mat-card-content>
+          <mat-card-actions class="feature-actions" align="end">
+            <a mat-stroked-button class="feature-cta" [routerLink]="f.route">Open</a>
+          </mat-card-actions>
+        </mat-card>
+      }
+    </div>
+  </section>
+</div>

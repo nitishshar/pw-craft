@@ -2,6 +2,33 @@
 
 @include mat.core();
 
+:root {
+  --pw-font-sans: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --pw-font-display: 'IBM Plex Sans', var(--pw-font-sans);
+  --pw-font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --pw-bg-deep: #050810;
+  --pw-bg-mid: #0c1222;
+  --pw-bg-top: #111a2e;
+  --pw-surface: rgba(22, 32, 52, 0.78);
+  --pw-surface-raised: rgba(32, 44, 68, 0.88);
+  --pw-border: rgba(148, 163, 184, 0.1);
+  --pw-border-strong: rgba(148, 163, 184, 0.18);
+  --pw-text: #e8eef7;
+  --pw-text-muted: rgba(200, 214, 234, 0.72);
+  --pw-text-subtle: rgba(148, 163, 184, 0.88);
+  --pw-accent: #7dd3fc;
+  --pw-accent-dim: rgba(125, 211, 252, 0.14);
+  --pw-success: #4ade80;
+  --pw-success-bg: rgba(74, 222, 128, 0.1);
+  --pw-radius-lg: 22px;
+  --pw-radius-md: 16px;
+  --pw-radius-sm: 12px;
+  --pw-shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.25);
+  --pw-shadow-lift: 0 20px 50px rgba(0, 0, 0, 0.42);
+  --pw-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 html {
   color-scheme: dark;
   @include mat.theme(
@@ -9,14 +36,14 @@ html {
       color: (
         theme-type: dark,
         primary: mat.$azure-palette,
-        tertiary: mat.$magenta-palette,
+        tertiary: mat.$violet-palette,
       ),
       typography: (
         brand-family: 'IBM Plex Sans',
         plain-family: Inter,
         bold-weight: 600,
       ),
-      density: -2,
+      density: -1,
     ),
   );
 }
@@ -24,26 +51,145 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-family: var(--pw-font-sans);
   letter-spacing: 0.01em;
-  color: #e2e8f0;
-  background:
-    radial-gradient(ellipse 100% 70% at 50% -25%, rgba(56, 189, 248, 0.14), transparent 55%),
-    linear-gradient(165deg, #0a0f1a 0%, #0f172a 38%, #0c111d 100%);
+  color: var(--pw-text);
+  background-color: var(--pw-bg-deep);
+  background-image:
+    radial-gradient(ellipse 120% 80% at 0% -30%, rgba(56, 189, 248, 0.12), transparent 50%),
+    radial-gradient(ellipse 90% 60% at 100% 0%, rgba(139, 92, 246, 0.08), transparent 45%),
+    linear-gradient(180deg, var(--pw-bg-top) 0%, var(--pw-bg-mid) 42%, var(--pw-bg-deep) 100%);
+  background-attachment: fixed;
+}
+
+::selection {
+  background: rgba(56, 189, 248, 0.28);
+  color: #fff;
 }
 
 code,
 pre {
-  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
-    monospace;
+  font-family: var(--pw-font-mono);
+  font-size: 0.9em;
+  padding: 0.12em 0.45em;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--pw-border);
+}
+
+/* Shared inner-page chrome */
+.app-page {
+  max-width: 920px;
+  margin: 0 auto;
+  animation: pw-page-in 0.45s var(--pw-ease-out) both;
+}
+
+@keyframes pw-page-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-intro {
+  margin-bottom: clamp(1.25rem, 3vw, 2rem);
+}
+
+.page-kicker {
+  margin: 0 0 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pw-accent);
+}
+
+.app-page > .page-intro h1,
+.app-page h1:first-of-type {
+  margin: 0 0 0.5rem;
+  font-family: var(--pw-font-display);
+  font-size: clamp(1.65rem, 2.8vw, 2.05rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.hint {
+  margin: 0;
+  color: var(--pw-text-muted);
+  max-width: 62ch;
+  line-height: 1.55;
+  font-size: 0.98rem;
+}
+
+.surface-card {
+  display: block;
+  margin-bottom: 1.25rem;
+  border-radius: var(--pw-radius-lg) !important;
+  overflow: hidden;
+  transition: box-shadow 0.25s var(--pw-ease-out), border-color 0.25s ease;
+}
+
+.surface-card:hover {
+  box-shadow: var(--pw-shadow-lift);
 }
 
 .mat-mdc-card,
 .mat-mdc-elevation-specific.mat-mdc-card {
-  background: rgba(30, 41, 59, 0.72);
-  border: 1px solid rgba(148, 163, 184, 0.14);
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.04) inset,
-    0 18px 40px rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(10px);
+  background: var(--pw-surface) !important;
+  border: 1px solid var(--pw-border) !important;
+  box-shadow: var(--pw-shadow-soft), 0 1px 0 rgba(255, 255, 255, 0.04) inset !important;
+  backdrop-filter: blur(16px);
+}
+
+.mat-mdc-card-header {
+  padding-top: 1.1rem !important;
+}
+
+.mat-mdc-card-title {
+  font-family: var(--pw-font-display) !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.mat-mdc-card-subtitle {
+  color: var(--pw-text-muted) !important;
+}
+
+.mat-mdc-table {
+  background: transparent !important;
+}
+
+.mat-mdc-header-row {
+  background: rgba(0, 0, 0, 0.28) !important;
+}
+
+.mat-mdc-header-cell {
+  font-weight: 600 !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  color: var(--pw-text-subtle) !important;
+}
+
+.mat-mdc-row:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.mat-mdc-progress-bar {
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.mat-mdc-outlined-button .mdc-button__outline,
+.mat-mdc-raised-button .mat-mdc-button-touch-target {
+  border-radius: var(--pw-radius-sm);
+}
+
+.mat-mdc-form-field-subscript-wrapper {
+  font-size: 0.8rem;
 }
