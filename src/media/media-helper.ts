@@ -1,3 +1,19 @@
+/**
+ * **Artifacts** tied to {@link PwCraftConfig}: disk screenshots (full page, element, highlighted),
+ * **trace** start/stop to zip, **video** path helpers, **HTML** capture, and **console** log collection.
+ * Used by {@link PwCraftSession} for Gherkin attachments and failure diagnostics.
+ *
+ * @example Timestamped screenshot for a step
+ * ```ts
+ * import { MediaHelper } from 'pw-craft';
+ * import { defaultConfig } from 'pw-craft';
+ * import { Logger } from 'pw-craft';
+ *
+ * const logger = new Logger();
+ * const media = new MediaHelper(page, defaultConfig, logger);
+ * const file = await media.screenshotWithTimestamp('after-checkout');
+ * ```
+ */
 import type { Page } from '@playwright/test';
 import type { PwCraftConfig } from '../config';
 import type { Logger } from '../helpers/logger';

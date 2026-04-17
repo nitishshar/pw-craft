@@ -1,3 +1,15 @@
+/**
+ * Small **structured logger** with levels, optional **ANSI** colors, **JSON** lines, in-memory buffer
+ * ({@link Logger.getBuffer}), and integration with {@link PwCraftConfig.logging}.
+ *
+ * @example
+ * ```ts
+ * import { Logger } from 'pw-craft';
+ *
+ * const log = new Logger({ level: 'debug', format: 'text' });
+ * log.info('Opened page', { url: 'http://localhost:4200' });
+ * ```
+ */
 import type { LoggerLevel } from '../config';
 
 const LEVEL_ORDER: Record<Exclude<LoggerLevel, 'silent'>, number> = {

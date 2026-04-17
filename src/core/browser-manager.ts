@@ -1,3 +1,18 @@
+/**
+ * Owns Playwright **browser → context → page** lifecycle using {@link PwCraftConfig}: merges partial
+ * config with {@link defaultConfig}, applies timeouts, optional **video** recording, and exposes
+ * helpers to open extra contexts/pages or **reset** the active page.
+ *
+ * @example Launch, use the page, then close (video path available after close when recording)
+ * ```ts
+ * import { BrowserManager } from 'pw-craft';
+ *
+ * const manager = new BrowserManager({ headless: true, baseUrl: 'http://localhost:4200' });
+ * const page = await manager.launch();
+ * await page.goto(manager.getConfig().baseUrl);
+ * const { videoPath } = await manager.close();
+ * ```
+ */
 import { chromium, firefox, webkit, type Browser, type BrowserContext, type Page } from '@playwright/test';
 import type { PwCraftConfig } from '../config';
 import { defaultConfig } from '../config';

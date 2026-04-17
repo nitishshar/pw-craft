@@ -1,3 +1,20 @@
+/**
+ * **One instance per Gherkin scenario** (playwright-bdd): exposes the same helpers as typical tests
+ * (`find`, `action`, `wait`, `assert`, `nav`, `network`, `storage`, `a11y`, `media`) and coordinates
+ * **trace**, **console log**, and **failure screenshot** attachments on {@link PwCraftSession.teardown}.
+ *
+ * Constructed from Playwright `testInfo`, merged {@link PwCraftConfig}, and the scenario's
+ * `page` / `context` / `browser`.
+ *
+ * @example Step definitions (simplified)
+ * ```ts
+ * import { PwCraftSession } from 'pw-craft';
+ * // In a Before hook: const session = new PwCraftSession(testInfo, config, page, context, browser);
+ * // await session.ready();
+ * // In steps: await session.nav.goto('/'); await session.assert.textContains(session.find.byTestId('x'), 'y');
+ * // After: await session.teardown(passed);
+ * ```
+ */
 import type { Browser, BrowserContext, Page, TestInfo } from '@playwright/test';
 import { ActionHelper } from '../actions/action-helper';
 import { shouldAttachScenarioArtifact, type PwCraftConfig } from '../config';
@@ -11,7 +28,6 @@ import { Navigator } from '../navigation/navigator';
 import { ElementFinder } from '../elements/element-finder';
 import { WaitHelper } from '../waiting/wait-helper';
 
-/** Per-scenario session for Gherkin steps executed by playwright-bdd (Playwright test runner). */
 export class PwCraftSession {
   browser!: Browser;
   context!: BrowserContext;

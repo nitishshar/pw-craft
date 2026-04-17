@@ -1,59 +1,37 @@
-# PwCraftAngularDemo
+# pw-craft Angular demo
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.19.
+Small **Angular 19** reference application used as the **application under test** for the parent [`pw-craft`](../README.md) Playwright + Gherkin suite. It exercises async UIs, forms, tables, accessibility patterns, and animations so examples in `test/features` stay realistic.
 
-## Development server
-
-To start a local development server, run:
+## Run locally
 
 ```bash
-ng serve
+npm install
+npm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Open `http://localhost:4200/`. Ensure `PWCRAFT_BASE_URL` in the **repository root** `.env` matches this URL when you run BDD tests.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Build
 
 ```bash
-ng generate component component-name
+npm run build
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Production output goes to `angular-app/dist/`. Component style budgets are configured in `angular.json` for this demo’s richer home page styling.
+
+## End-to-end tests
+
+E2E is **not** `ng e2e`. Scenarios live in the parent repo under `../test/features` and run with **playwright-bdd** from the parent:
 
 ```bash
-ng generate --help
+npm run e2e
 ```
 
-## Building
+That runs `bddgen` and `playwright test` from the repository root. See the parent [README](../README.md) for prerequisites, tags, and report commands (`npm run report`, `npm run report:monocart`).
 
-To build the project run:
+## Stack
 
-```bash
-ng build
-```
+- Angular CLI **19.x**, standalone components, lazy-friendly routing under `src/app/pages/`
+- **Angular Material** (toolbar, cards, buttons, form controls, etc.)
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+When you add a new demo page, register the route, add a home card with a stable `data-testid`, and extend the Gherkin suite in the parent `test/` tree.

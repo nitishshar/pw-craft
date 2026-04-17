@@ -1,3 +1,16 @@
+/**
+ * High-level **user gestures**: click variants, fill/type/clear, hover, scroll, drag-and-drop,
+ * file upload, keyboard chords, and clipboard helpers. Targets may be **CSS strings** or existing
+ * **Locators**.
+ *
+ * @example Fill a field and submit with Enter
+ * ```ts
+ * import { ActionHelper } from 'pw-craft';
+ *
+ * const action = new ActionHelper(page);
+ * await action.fillAndSubmit('#email', 'user@example.com');
+ * ```
+ */
 import type { Locator, Page } from '@playwright/test';
 import { sleep } from '../helpers/utils';
 

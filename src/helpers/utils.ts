@@ -1,3 +1,17 @@
+/**
+ * Shared **utilities**: deep object merge (used by config and {@link BrowserManager}), **retry** with
+ * backoff, **env** parsers for `process.env`, filename/date helpers for screenshots/reports, and small
+ * array helpers.
+ *
+ * @example Merge partial config safely
+ * ```ts
+ * import { deepMerge, defaultConfig } from 'pw-craft';
+ *
+ * const cfg = deepMerge(defaultConfig as unknown as Record<string, unknown>, {
+ *   baseUrl: 'http://127.0.0.1:4200',
+ * } as Record<string, unknown>);
+ * ```
+ */
 import dayjs from 'dayjs';
 
 export function isPlainObject(value: unknown): value is Record<string, unknown> {

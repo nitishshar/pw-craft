@@ -1,3 +1,16 @@
+/**
+ * **Route interception** on a `BrowserContext`: stub JSON APIs, sequential responses, delays,
+ * aborts, offline mode, and optional **capture** of requests/responses for assertions.
+ *
+ * @example Stub a REST endpoint during a test
+ * ```ts
+ * import { NetworkHelper } from 'pw-craft';
+ *
+ * const net = new NetworkHelper(page, context);
+ * await net.mockApiResponse('http://localhost:4200/api/items', { body: { items: [] } });
+ * await page.reload();
+ * ```
+ */
 import type { BrowserContext, Page, Request, Response, Route } from '@playwright/test';
 
 type MockBody = string | Buffer | object;

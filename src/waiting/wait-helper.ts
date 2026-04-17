@@ -1,3 +1,19 @@
+/**
+ * **Async UI** waits built on Playwright `expect` and locator states: visibility, counts, text/value,
+ * attributes/classes, load states, **Angular testability** hooks when present, **network** idle or
+ * specific responses, **downloads**, and **dialogs**.
+ *
+ * Prefer these over raw `page.waitForTimeout` for flakier SPAs.
+ *
+ * @example Wait for a row to appear after filtering
+ * ```ts
+ * import { WaitHelper } from 'pw-craft';
+ *
+ * const wait = new WaitHelper(page);
+ * await wait.forVisible('[data-testid="product-row"]');
+ * await wait.forCount('[data-testid="product-row"]', 3);
+ * ```
+ */
 import type { Download, Locator, Page, Request, Response } from '@playwright/test';
 import { expect } from '@playwright/test';
 import { sleep } from '../helpers/utils';

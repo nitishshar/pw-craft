@@ -1,3 +1,16 @@
+/**
+ * Lightweight **accessibility-oriented** checks without pulling a separate a11y engine: ARIA roles
+ * and attributes, live regions, focus order (Tab walk), contrast-style helpers where applicable, and
+ * optional **snapshot** text for debugging.
+ *
+ * @example Assert a live region role
+ * ```ts
+ * import { AccessibilityHelper } from 'pw-craft';
+ *
+ * const a11y = new AccessibilityHelper(page);
+ * await a11y.checkLiveRegion('[data-testid="toast"]', 'status');
+ * ```
+ */
 import type { Locator, Page } from '@playwright/test';
 
 export class AccessibilityHelper {

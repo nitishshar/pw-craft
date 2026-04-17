@@ -1,3 +1,16 @@
+/**
+ * **Browser storage** from the page: `localStorage` / `sessionStorage` get/set/clear (including JSON),
+ * snapshot/restore helpers, and **cookie** helpers on the `BrowserContext`.
+ *
+ * @example Seed auth state before navigation
+ * ```ts
+ * import { StorageHelper } from 'pw-craft';
+ *
+ * const storage = new StorageHelper(page, context);
+ * await storage.setAuthCookie('session', token, 'http://localhost:4200');
+ * await page.goto('/app');
+ * ```
+ */
 import type { BrowserContext, Page } from '@playwright/test';
 
 export class StorageHelper {

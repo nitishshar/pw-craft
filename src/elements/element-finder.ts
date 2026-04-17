@@ -1,3 +1,18 @@
+/**
+ * Thin, consistent wrappers around Playwright locators: **roles**, **test ids**, common **data-***
+ * attributes, CSS/XPath, and Angular-ish selectors (`formcontrolname`, component tags). Pass an
+ * optional second constructor argument (**root** `Locator`) to scope all lookups to a subtree
+ * (dialog, card, row).
+ *
+ * @example Stable selectors for a demo app
+ * ```ts
+ * import { ElementFinder } from 'pw-craft';
+ *
+ * const find = new ElementFinder(page);
+ * const title = find.byTestId('home-hero-title');
+ * const submit = find.byRole('button', { name: /submit/i });
+ * ```
+ */
 import type { Page, Locator } from '@playwright/test';
 
 type Root = Page | Locator;

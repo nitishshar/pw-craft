@@ -1,3 +1,35 @@
+/**
+ * Builds **standalone** HTML (with Chart.js from CDN), **JSON**, and **JUnit** reports from in-memory
+ * {@link TestResult} rows — useful for custom pipelines or aggregating non-Playwright checks. This is
+ * separate from Playwright's built-in HTML reporter (see repo `README`).
+ *
+ * @example Emit all formats after a synthetic run
+ * ```ts
+ * import { ReportGenerator } from 'pw-craft';
+ * import { Logger } from 'pw-craft';
+ *
+ * const logger = new Logger();
+ * const gen = new ReportGenerator(
+ *   {
+ *     outputDir: 'reports',
+ *     formats: ['html', 'json', 'junit'],
+ *     title: 'Nightly',
+ *     theme: 'dark',
+ *     colors: { primary: '#22d3ee' },
+ *     metadata: { branch: 'main' },
+ *   },
+ *   logger,
+ * );
+ * gen.addResult({
+ *   id: '1',
+ *   name: 'Smoke',
+ *   status: 'passed',
+ *   durationMs: 1200,
+ *   steps: [{ text: 'Open', status: 'passed', durationMs: 400 }],
+ * });
+ * await gen.generate();
+ * ```
+ */
 import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
 import type { PwCraftConfig, ReportingThemeColors } from '../config';

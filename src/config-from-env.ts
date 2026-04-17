@@ -1,3 +1,18 @@
+/**
+ * Maps **`process.env`** (e.g. `PWCRAFT_BASE_URL`, `PWCRAFT_BROWSER`, media flags) into a full
+ * {@link PwCraftConfig} by deep-merging onto {@link defaultConfig}. Use in Playwright fixtures or
+ * Node scripts after loading `.env` with `dotenv`.
+ *
+ * @example Playwright globalSetup or a custom runner
+ * ```ts
+ * import { config as loadEnv } from 'dotenv';
+ * import { loadPwCraftConfigFromEnv } from 'pw-craft';
+ *
+ * loadEnv();
+ * const pwCraft = loadPwCraftConfigFromEnv();
+ * console.log(pwCraft.baseUrl, pwCraft.browser);
+ * ```
+ */
 import type {
   BrowserName,
   PwCraftConfig,

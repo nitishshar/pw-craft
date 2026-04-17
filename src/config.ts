@@ -1,3 +1,24 @@
+/**
+ * Central **typed configuration** for pw-craft: browser choice, `baseUrl`, timeouts, Playwright
+ * launch/context options, **reporting** (custom HTML/JSON/JUnit), **media** (screenshots, video, trace),
+ * **Gherkin** attachment policy, logging, and retry defaults.
+ *
+ * Start from {@link defaultConfig} and override fields, or merge partials in {@link BrowserManager}'s
+ * constructor. CI/local `.env` values map through {@link loadPwCraftConfigFromEnv}.
+ *
+ * @example Override base URL and trace for debugging
+ * ```ts
+ * import { BrowserManager, defaultConfig } from 'pw-craft';
+ *
+ * const manager = new BrowserManager({
+ *   baseUrl: 'https://staging.example.com',
+ *   media: {
+ *     ...defaultConfig.media,
+ *     trace: { ...defaultConfig.media.trace, capture: 'on' },
+ *   },
+ * });
+ * ```
+ */
 import type { BrowserContextOptions, LaunchOptions } from '@playwright/test';
 
 export type BrowserName = 'chromium' | 'firefox' | 'webkit';

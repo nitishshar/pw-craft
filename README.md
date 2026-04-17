@@ -188,6 +188,8 @@ The HTML report embeds Chart.js from `cdn.jsdelivr.net` and is intentionally sel
 | `PLAYWRIGHT_HTML_OUTPUT_DIR` | Output folder for Playwright HTML report (default `playwright-report`) |
 | `PLAYWRIGHT_HTML_OPEN` | `always` \| `never` \| `on-failure` when opening the Playwright HTML report |
 | `PLAYWRIGHT_HTML_TITLE` | Title shown in the Playwright HTML report |
+| `MONOCART_REPORT_FILE` | Output path for the Monocart HTML report (default `monocart-report/index.html`) |
+
 ## Angular demo (`angular-app/`)
 
 ```bash
@@ -204,6 +206,19 @@ Build:
 cd angular-app
 npm run build
 ```
+
+The app is a **reference UI** for the library: Angular 19 standalone components, **Angular Material** for layout and controls, and a shared dark theme in `angular-app/src/styles.scss`. The home page lists **demo routes** as cards (hero, stats, and a grid of scenarios). Each card exposes a stable **`data-testid`** for Playwright (for example `feature-products`, `feature-form`, …); keep these aligned with `test/features` and step definitions when you add or rename demos.
+
+| Demo route | Path | `data-testid` (card) |
+| --- | --- | --- |
+| Products | `/products` | `feature-products` |
+| Form demo | `/form-demo` | `feature-form` |
+| Async demo | `/async-demo` | `feature-async` |
+| Counter | `/counter-demo` | `feature-counter` |
+| Animation | `/animation-demo` | `feature-animation` |
+| About | `/about` | `feature-about` |
+
+More detail for working inside the demo app folder is in [`angular-app/README.md`](angular-app/README.md).
 
 ## Notes on TypeScript configuration
 

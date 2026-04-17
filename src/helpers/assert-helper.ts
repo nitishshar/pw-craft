@@ -1,3 +1,15 @@
+/**
+ * Readable **expect** wrappers for elements, text, values, counts, URLs, cookies, and **soft**
+ * assertions (collect errors, then {@link AssertHelper.throwSoftAssertions}).
+ *
+ * @example Assert visible heading text
+ * ```ts
+ * import { AssertHelper } from 'pw-craft';
+ *
+ * const assert = new AssertHelper(page);
+ * await assert.textContains('h1', 'Dashboard');
+ * ```
+ */
 import type { Locator, Page } from '@playwright/test';
 import { expect } from '@playwright/test';
 

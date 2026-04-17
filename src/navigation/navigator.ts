@@ -1,3 +1,17 @@
+/**
+ * URL helpers on top of Playwright's `Page`: **goto** with query/hash, **route templates** (`:id`),
+ * back/forward/reload, **assert** current URL, **waitForURL**, and simple **multi-tab** utilities.
+ * Paths are resolved against the constructor `baseUrl` unless you pass an absolute `http(s)` URL.
+ *
+ * @example Navigate with query string and assert URL
+ * ```ts
+ * import { Navigator } from 'pw-craft';
+ *
+ * const nav = new Navigator(page, 'http://localhost:4200');
+ * await nav.goto('/search', { query: { q: 'widgets' } });
+ * await nav.assertCurrentUrl(/q=widgets/, 'contains');
+ * ```
+ */
 import type { Page } from '@playwright/test';
 import { expect } from '@playwright/test';
 
