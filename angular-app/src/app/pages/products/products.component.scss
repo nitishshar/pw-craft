@@ -1,6 +1,18 @@
+.page-head {
+  margin-bottom: 8px;
+}
+
+.page-head h1 {
+  margin: 0 0 8px;
+  font-family: 'IBM Plex Sans', Inter, system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+
 .hint {
   color: rgba(226, 232, 240, 0.78);
   max-width: 90ch;
+  margin: 0;
+  line-height: 1.5;
 }
 
 .loading {

@@ -32,3 +32,12 @@ Feature: Navigation
     Given I open the application
     When I open the counter demo in a new tab
     Then I should have at least 2 browser tabs
+
+  Scenario: Toolbar exposes primary demo routes
+    Given I open the application
+    Then I should see navigation link "Products"
+    And I should see navigation link "Form demo"
+    And I should see navigation link "Async demo"
+    And I should see navigation link "Counter"
+    And I should see navigation link "Animation"
+    And I should see navigation link "About"

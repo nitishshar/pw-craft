@@ -82,17 +82,34 @@ export class BrowserManager {
     return this.page;
   }
 
-  async close(): Promise<void> {
+  /**
+   * Closes the browser. Closes the page before the context so Playwright finalizes
+   * `recordVideo` and `video.path()` can be read for scenario attachments (e.g. testInfo).
+   */
+  async close(): Promise<{ videoPath?: string }> {
+    let videoPath: string | undefined;
     try {
+      if (this.page) {
+        const recording = this.page.video();
+        await this.page.close().catch(() => undefined);
+        this.page = undefined;
+        if (recording) {
+          try {
+            videoPath = await recording.path();
+          } catch {
+            videoPath = undefined;
+          }
+        }
+      }
       await this.context?.close();
     } finally {
       this.context = undefined;
-      this.page = undefined;
     }
     try {
       await this.browser?.close();
     } finally {
       this.browser = undefined;
     }
+    return { videoPath };
   }
 }

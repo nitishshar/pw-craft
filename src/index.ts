@@ -13,5 +13,5 @@ export * from './helpers/accessibility-helper';
 export * from './helpers/base-page';
 export * from './media/media-helper';
 export * from './reporting/report-generator';
-export * from './cucumber/world';
-export * from './cucumber/config-from-env';
+export * from './bdd/pw-session';
+export * from './config-from-env';

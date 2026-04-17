@@ -6,6 +6,23 @@ export type ScreenshotCaptureMode = 'on-failure' | 'always' | 'never';
 export type VideoCaptureMode = 'on' | 'off' | 'retain-on-failure';
 export type TraceCaptureMode = 'on-first-retry' | 'on' | 'off' | 'retain-on-failure';
 
+/** When to attach optional scenario artifacts via Playwright testInfo */
+export type ScenarioArtifactAttachMode = 'never' | 'always' | 'on-failure';
+
+export interface GherkinAttachmentConfig {
+  /** Attach a PNG after each Gherkin step */
+  stepScreenshot: boolean;
+  stepScreenshotFullPage: boolean;
+  /** Requires `media.video.record` not `off` */
+  video: ScenarioArtifactAttachMode;
+  /** Requires `media.trace.capture` not `off` and a trace file produced */
+  traceZip: ScenarioArtifactAttachMode;
+}
+
+export interface GherkinReportConfig {
+  attachments: GherkinAttachmentConfig;
+}
+
 export interface ReportingThemeColors {
   primary: string;
   surface: string;
@@ -76,6 +93,8 @@ export interface PwCraftConfig {
   contextOptions: BrowserContextOptions;
   reporting: ReportingConfig;
   media: MediaConfig;
+  /** Gherkin step / scenario attachments (Playwright testInfo, separate from built-in reporters) */
+  gherkin: GherkinReportConfig;
   logging: LoggingConfig;
   retry: RetryConfig;
 }
@@ -115,6 +134,14 @@ export const defaultConfig: PwCraftConfig = {
     video: { record: 'off', outputDir: 'reports/video' },
     trace: { capture: 'off', outputDir: 'reports/trace' },
   },
+  gherkin: {
+    attachments: {
+      stepScreenshot: true,
+      stepScreenshotFullPage: false,
+      video: 'never',
+      traceZip: 'on-failure',
+    },
+  },
   logging: {
     level: 'info',
     console: true,
@@ -132,4 +159,13 @@ export function mergeReportingColors(
   partial?: Partial<ReportingThemeColors>,
 ): ReportingThemeColors {
   return { ...defaultReportingColors, ...partial };
+}
+
+export function shouldAttachScenarioArtifact(
+  mode: ScenarioArtifactAttachMode,
+  scenarioPassed: boolean,
+): boolean {
+  if (mode === 'never') return false;
+  if (mode === 'always') return true;
+  return !scenarioPassed;
 }

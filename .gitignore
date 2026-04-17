@@ -1,8 +1,25 @@
 node_modules/
 dist/
-reports/
 *.log
 .env
+
+# Library / demo build & local reports (screenshots, video, trace under reports/)
+reports/
+angular-app/reports/
+
+# Playwright Test + BDD generated artifacts
+playwright-report/
+test-results/
+blob-report/
+monocart-report/
+.features-gen/
+playwright/.cache/
+
+# If Playwright is ever run from angular-app/ with default paths
+angular-app/playwright-report/
+angular-app/test-results/
+angular-app/blob-report/
+angular-app/monocart-report/
+
 angular-app/node_modules/
 angular-app/dist/
-angular-app/reports/

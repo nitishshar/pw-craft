@@ -4,22 +4,25 @@
   "type": "commonjs",
   "scripts": {
     "build": "tsc",
-    "test": "cucumber-js --config cucumber.config.cjs --require-module ts-node/register --require src/cucumber/world.ts --require src/cucumber/hooks.ts --require test/support/00-init.ts --require test/support/common.steps.ts --require test/step-definitions/navigation.steps.ts --require test/step-definitions/forms.steps.ts --require test/step-definitions/waiting.steps.ts test/features/navigation.feature test/features/forms.feature test/features/waiting.feature",
+    "test": "bddgen && playwright test",
+    "bddgen": "bddgen",
+    "report:playwright": "playwright show-report",
+    "report:monocart": "monocart show-report monocart-report/index.html",
     "lint": "eslint src/**/*.ts"
   },
   "dependencies": {
-    "@cucumber/cucumber": "^11.1.0",
     "@playwright/test": "^1.50.0",
     "chalk": "^4.1.2",
     "dayjs": "^1.11.13",
     "dotenv": "^16.4.7",
     "uuid": "^11.0.5",
-    "winston": "^3.17.0"
+    "winston": "^3.17.0",
+    "playwright-bdd": "^8.5.0"
   },
   "devDependencies": {
     "@types/node": "^22.13.0",
     "@types/uuid": "^10.0.0",
-    "ts-node": "^10.9.2",
+    "monocart-reporter": "^2.10.0",
     "typescript": "^5.7.3"
   }
 }

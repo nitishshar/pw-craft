@@ -2,25 +2,72 @@
   position: sticky;
   top: 0;
   z-index: 10;
+  padding-inline: 12px 16px;
+  min-height: 56px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.92) 0%, rgba(15, 23, 42, 0.78) 100%);
+  backdrop-filter: blur(12px);
 }
 
 .brand {
-  font-weight: 700;
-  letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'IBM Plex Sans', Inter, system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: none;
+}
+
+.brand-name {
+  font-size: 1.05rem;
+}
+
+.brand-divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(226, 232, 240, 0.22);
+}
+
+.brand-sub {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(226, 232, 240, 0.72);
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px;
 }
 
 .spacer {
   flex: 1;
+  min-width: 8px;
 }
 
 .app-main {
-  padding: 24px;
-  max-width: 1200px;
+  padding: 28px 24px 48px;
+  max-width: 1180px;
   margin: 0 auto;
 }
 
 a.active {
-  outline: 2px solid rgba(255, 255, 255, 0.35);
-  outline-offset: 2px;
+  position: relative;
   border-radius: 10px;
+}
+
+a.active::after {
+  content: '';
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 6px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  opacity: 0.85;
 }
